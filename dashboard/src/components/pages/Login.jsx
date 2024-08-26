@@ -13,6 +13,7 @@ function Login() {
         }
         axios.post('http://127.0.0.1:8000/api/v1/auth/login',data)
       .then((response) =>{
+       console.log(response.data);
        
         if(response.data.role == 'User'){
             console.log("You do not have permission for login !!");

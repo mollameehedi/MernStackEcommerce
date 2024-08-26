@@ -1,16 +1,17 @@
 import { Card, Space ,Button, Checkbox, Form, Input} from 'antd';
 import axios from "axios";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 
 function ChangePassword() {
+  let {email} = useParams();
 
     let navigate = useNavigate()
       const onFinish = (values) => {
         
         let forgotPasswordData  = { 
           password:values.password,
+          token:email
         }
-        console.log(forgotPasswordData);
         
         axios.post('http://127.0.0.1:8000/api/v1/auth/changepassword',forgotPasswordData)
       .then((response) =>{

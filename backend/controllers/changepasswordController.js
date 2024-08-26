@@ -1,19 +1,19 @@
 const User = require('../model/userSchema');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 let changepasswordController = async (req,res) =>{
 
-    let {email,password} = req.body
-    // let data = await User.find({email:email})
-    
+    let {token,password} = req.body
+    bcrypt.hash(password, 10, async function(err, hash) {
+    jwt.verify(token, 'mehedi', async function(err, decoded) {
+        let axistingUser = await User.find({email:decoded.email})
+        let userData = await User.findOneAndUpdate({email:decoded.email},{password:hash,token:''})
+      });
 
-    // if(data[0].otp == otp){
-    //     await User.findOneAndUpdate({email:email},{otp:"",verify:true})
-    // }
-    // else{
-    //     res.send('Otp Not Match!!')
-
-    // }
+   
     res.send({success:'Otp Verify Successfully!!'})
+});
     
 }
 
