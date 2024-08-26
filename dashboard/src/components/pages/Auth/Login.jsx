@@ -7,9 +7,13 @@ function Login() {
     let navigate = useNavigate()
       const onFinish = (values) => {
         
+        // let data  = {
+        //   email:values.email,
+        //   password:values.password,
+        // }
         let data  = {
-          email:values.email,
-          password:values.password,
+          email:'mollameehedi@gmail.com',
+          password:'Pa$$w0rd!',
         }
         axios.post('http://127.0.0.1:8000/api/v1/auth/login',data)
       .then((response) =>{
@@ -18,7 +22,9 @@ function Login() {
         if(response.data.role == 'User'){
             console.log("You do not have permission for login !!");
         }else{
-            console.log("You do not have permission for login !!");
+
+          localStorage.setItem('user',JSON.stringify(response.data));
+            navigate('/home')
 
         }
         // navigate(`/otp/${response.data.email}`)
@@ -63,7 +69,7 @@ function Login() {
           name="email"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your Email!',
             },
           ]}
@@ -76,7 +82,7 @@ function Login() {
           name="password"
           rules={[
             {
-              required: true,
+              required: false,
               message: 'Please input your password!',
             },
           ]}

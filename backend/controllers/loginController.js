@@ -11,7 +11,14 @@ let loginController = async (req,res) => {
     }else{
         bcrypt.compare(password, existingUser[0].password, function(err, result) {
             if(result){
-                res.send(existingUser[0])
+                let data = {
+                    id:existingUser[0]._id,
+                    name:existingUser[0].name,
+                    email:existingUser[0].email,
+                    role:existingUser[0].role,
+                    verify:existingUser[0].verify,
+                }
+                res.send(data)
             }else{
                 res.send({error:"Credencial is not valid"})
             }
