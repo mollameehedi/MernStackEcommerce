@@ -2,24 +2,20 @@ import { Card, Space ,Button, Checkbox, Form, Input} from 'antd';
 import axios from "axios";
 import {Link, useNavigate} from 'react-router-dom';
 
-function Login() {
+function ChangePassword() {
 
     let navigate = useNavigate()
       const onFinish = (values) => {
         
-        let data  = {
-          email:values.email,
+        let forgotPasswordData  = { 
           password:values.password,
         }
-        axios.post('http://127.0.0.1:8000/api/v1/auth/login',data)
+        console.log(forgotPasswordData);
+        
+        axios.post('http://127.0.0.1:8000/api/v1/auth/changepassword',forgotPasswordData)
       .then((response) =>{
-       
-        if(response.data.role == 'User'){
-            console.log("You do not have permission for login !!");
-        }else{
-            console.log("You do not have permission for login !!");
-
-        }
+      console.log(response);
+      
         // navigate(`/otp/${response.data.email}`)
         
       })
@@ -37,7 +33,7 @@ function Login() {
       return (
         <>
         <Space direction="vertical" size={16}>
-        <Card title="Login" extra={<a href="#">More</a>} style={{ width: 300 }}>
+        <Card title="Change Password" extra={<a href="#">More</a>} style={{ width: 300 }}>
         <Form
         name="basic"
         labelCol={{
@@ -57,26 +53,14 @@ function Login() {
         autoComplete="off"
       >
         
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your Email!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
     
         <Form.Item
-          label="Password"
+          label="New Password"
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: 'Please input your New password!',
             },
           ]}
         >
@@ -113,4 +97,5 @@ function Login() {
       )
     }
 
-export default Login
+
+export default ChangePassword

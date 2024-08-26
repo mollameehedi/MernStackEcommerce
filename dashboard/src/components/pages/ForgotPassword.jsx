@@ -1,26 +1,18 @@
 import { Card, Space ,Button, Checkbox, Form, Input} from 'antd';
 import axios from "axios";
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
-function Login() {
+function ForgotPassword() {
 
     let navigate = useNavigate()
       const onFinish = (values) => {
         
         let data  = {
-          email:values.email,
-          password:values.password,
+          email:values.email, 
         }
-        axios.post('http://127.0.0.1:8000/api/v1/auth/login',data)
+        axios.post('http://127.0.0.1:8000/api/v1/auth/forgotpassword',data)
       .then((response) =>{
-       
-        if(response.data.role == 'User'){
-            console.log("You do not have permission for login !!");
-        }else{
-            console.log("You do not have permission for login !!");
-
-        }
-        // navigate(`/otp/${response.data.email}`)
+         console.log('Link Send Successfully!!')
         
       })
       .catch((err) =>{
@@ -37,7 +29,7 @@ function Login() {
       return (
         <>
         <Space direction="vertical" size={16}>
-        <Card title="Login" extra={<a href="#">More</a>} style={{ width: 300 }}>
+        <Card title="Forgot Password" extra={<a href="#">More</a>} style={{ width: 300 }}>
         <Form
         name="basic"
         labelCol={{
@@ -70,29 +62,6 @@ function Login() {
           <Input />
         </Form.Item>
     
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-    
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
     
         <Form.Item
           wrapperCol={{
@@ -101,10 +70,9 @@ function Login() {
           }}
         >
           <Button type="primary" htmlType="submit">
-            Login
+            Send Link
           </Button>
-          <br/>
-          <Link to="/forgotpassword">Forgot Password</Link>
+         
         </Form.Item>
       </Form>
         </Card>
@@ -113,4 +81,4 @@ function Login() {
       )
     }
 
-export default Login
+export default ForgotPassword
