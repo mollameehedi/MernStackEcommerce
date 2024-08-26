@@ -10,11 +10,11 @@ const items = [
     label: 'Users',
     children: [
       {
-        key: '/marchantlist',
+        key: '/home/userlist',
         label: 'Merchants',
       },
       {
-        key: '/userlist',
+        key: 'home/userlist',
         label: 'Users',
       }
     ],
