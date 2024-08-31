@@ -1,14 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Table } from "antd";
+import { Button, Space, Table,Modal, Input, Form  } from "antd";
+import { useSelector } from 'react-redux';
 
 
 
 const Category = () => {
   let [categories,setCategories] = useState([]);
-  let [username,setUsername] = useState([]);
+  let [loadData,setLoadData] = useState(false);
+  const [loading, setLoading] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editId, setEditId] = useState('');
 
+  const data = useSelector((state) => state.activeUser.value)
 
+let handleDelete = async(id) =>{
+  setLoading(id)
+  let userData = await  axios.post('http://127.0.0.1:8000/api/v1/product/deletecategory',{id:id})
+  console.log(userData);
+  setLoadData(!loadData)
+  setLoading('')
+}
+
+const showModal = (id) => {
+  setEditId(id)
+  setIsModalOpen(true);
+};
+
+const handleOk = () => {
+  setIsModalOpen(false);
+};
+
+const handleCancel = () => {
+  setIsModalOpen(false);
+};
+const onFinishModal = async (values) => {
+  await  axios.post('http://127.0.0.1:8000/api/v1/product/editcategory',{
+    name:values.name,
+    id:editId
+  })
+  .then((respone) =>{
+    setLoadData(!loadData)
+    setIsModalOpen(false);
+    
+  })
+  .catch((err) =>{
+    console.log(err)
+  })
+  
+  // console.log(data);
+  
+  console.log('Success:', values);
+};
+const onFinishFailed =  (errorInfo) => {
+ 
+  console.log('Failed:', errorInfo);
+};
 
 
 const columns = [
@@ -31,8 +78,12 @@ const columns = [
   {
     title: 'Action',
     dataIndex: 'isActive',
-    defaultSortOrder: 'descend',
-    sorter: (a, b) => a.age - b.age,
+    render: (_, record) => (
+      <Space size="middle">
+        <Button onClick={()=> showModal(record.key)}>Edit</Button>
+        <Button onClick={()=>handleDelete(record.key)} loading={loading == record.key? true: ''}>Delete</Button>
+      </Space>
+    ),
   },
 ];
 
@@ -40,13 +91,12 @@ useEffect(() =>{
   let data = [];
   async function user(){
   let userData = await  axios.get('http://127.0.0.1:8000/api/v1/product/allcategory')
- console.log(userData.data);
  
  
   userData.data.map((item) => (
 
     data.push({
-      key:item.id,
+      key:item._id,
       name:item.name,
       isActive:item.isActive? 'Approved':'Pending',
     }) 
@@ -57,7 +107,7 @@ useEffect(() =>{
   user()
   
   
-},[])
+},[loadData])
 const onChange = (pagination, sorter, extra) => {
   console.log('params', pagination, sorter, extra);
 };
@@ -72,6 +122,51 @@ const onChange = (pagination, sorter, extra) => {
       target: 'sorter-icon',
     }}
   />
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Form
+    name="basic"
+    labelCol={{
+      span: 8,
+    }}
+    wrapperCol={{
+      span: 16,
+    }}
+    style={{
+      maxWidth: 600,
+    }}
+    initialValues={{
+      remember: true,
+    }}
+    onFinish={onFinishModal}
+    onFinishFailed={onFinishFailed}
+    autoComplete="off"
+  >
+    <Form.Item
+      label="Category Name"
+      name="name"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your Categroy name!',
+        },
+      ]}
+    >
+      <Input />
+    </Form.Item>
+
+
+    <Form.Item
+      wrapperCol={{
+        offset: 8,
+        span: 16,
+      }}
+    >
+      <Button type="primary" htmlType="submit">
+        Submit
+      </Button>
+    </Form.Item>
+  </Form>
+      </Modal>
     </>
   )
 }
