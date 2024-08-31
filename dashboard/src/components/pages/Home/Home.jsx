@@ -25,7 +25,11 @@ const items = [
     label: 'Category',
     children: [
       {
-        key: '/category',
+        key: '/home/addcategory',
+        label: 'Create Category',
+      },
+      {
+        key: '/home/category',
         label: 'Category',
       },
       {
@@ -51,7 +55,7 @@ const items = [
     ],
   },
   {
-    key: '3',
+    key: '4',
     icon: <SettingOutlined />,
     label: 'Discount',
     children: [

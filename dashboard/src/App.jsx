@@ -14,6 +14,8 @@ import ForgotPassword from "./components/pages/Auth/ForgotPassword";
 import ChangePassword from "./components/pages/Auth/ChangePassword";
 import Home from "./components/pages/Home/Home";
 import User from "./components/pages/User/User";
+import Category from "./components/pages/Category/Category";
+import AddCategory from "./components/pages/Category/AddCategory";
 
 
 const router = createBrowserRouter(
@@ -27,6 +29,9 @@ const router = createBrowserRouter(
 
    <Route   path="/home"  element={<Home />}  >
      <Route  path="userlist" element={<User />} />
+
+     <Route  path="category" element={<Category />} />
+     <Route  path="addcategory" element={<AddCategory />} />
    </Route>
   </>
   )

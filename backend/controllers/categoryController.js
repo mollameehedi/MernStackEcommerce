@@ -9,7 +9,6 @@ let categoryController = async  (req,res) =>{
     ownerid:ownerId
  })
  category.save();
- console.log(category);
-    res.send(category);
+   res.send({success:'Created Successfully'});
 }
 module.exports = categoryController;
