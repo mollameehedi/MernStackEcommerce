@@ -2,96 +2,74 @@ import React, { useState, } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Col, Menu, Row } from 'antd';
 import {Outlet, useNavigate} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const items = [
-  {
-    key: '1',
-    icon: <MailOutlined />,
-    label: 'Users',
-    children: [
-      {
-        key: '/home/userlist',
-        label: 'Merchants',
-      },
-      {
-        key: 'home/userlist',
-        label: 'Users',
-      }
-    ],
-  },
-  {
-    key: '2',
-    icon: <AppstoreOutlined />,
-    label: 'Category',
-    children: [
-      {
-        key: '/home/addcategory',
-        label: 'Create Category',
-      },
-      {
-        key: '/home/category',
-        label: 'Category',
-      },
-      {
-        key: '/home/addsubcategory',
-        label: 'Create Sub Category',
-      },
-      {
-        key: '/home/subcategory',
-        label: 'Sub Category',
-      },
-      
-    ],
-  },
-  {
-    key: '3',
-    icon: <SettingOutlined />,
-    label: 'Product',
-    children: [
-      {
-        key: 'productcreate',
-        label: 'Create',
-      },
-      {
-        key: 'allproduct',
-        label: 'All Products',
-      }
-    ],
-  },
-  {
-    key: '4',
-    icon: <SettingOutlined />,
-    label: 'Discount',
-    children: [
-      {
-        key: '31',
-        label: 'Add Discount',
-      },
-      {
-        key: '32',
-        label: 'View Discount',
-      }
-    ],
-  },
-];
-const getLevelKeys = (items1) => {
-  const key = {};
-  const func = (items2, level = 1) => {
-    items2.forEach((item) => {
-      if (item.key) {
-        key[item.key] = level;
-      }
-      if (item.children) {
-        func(item.children, level + 1);
-      }
-    });
+
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
   };
-  func(items1);
-  return key;
-};
-const levelKeys = getLevelKeys(items);
+}
+
 
 const Home = () => {
+  const data = useSelector((state) => state.activeUser.value);
+
+
+  const items = [
+    data.role == "Admin" &&
+    getItem("Users", "sub1", <MailOutlined />, [
+      getItem("Merchant", "/home/marchant"),
+      getItem("Users", "/home/userlist"),
+    ]),
+    getItem("Product", "sub2", <AppstoreOutlined />, [
+      getItem("Category", "sub3", null, [
+        getItem("Add Category", "/home/addcategory"),
+        getItem("View Category", "/home/category"),
+      ]),
+      getItem("Sub Category", "sub4", null, [
+        getItem("Add Sub Category", "/home/addsubcategory"),
+        getItem("View Sub Category", "/home/subcategory"),
+      ]),
+      getItem("Product", "sub5", null, [
+        getItem("Add Product", "/home/addproduct"),
+        getItem("View Product", "8"),
+        getItem("Add Variant", "/home/addvariant"),
+      ]),
+    ]),
+    getItem("Store", "sub6", <SettingOutlined />, [
+      getItem("Add Store", "/home/addstore"),
+      getItem("View Store", "10"),
+    ]),
+    getItem("Discount", "sub7", <SettingOutlined />, [
+      getItem("Add Discount", "/home/adddiscount"),
+      getItem("View Discount", "12"),
+    ]),
+    getItem("Affiliat", "sub8", <SettingOutlined />, [
+      getItem("Get Link", "/home/affiliate"),
+    ]),
+  ];
+  const getLevelKeys = (items1) => {
+    const key = {};
+    const func = (items2, level = 1) => {
+      items2.forEach((item) => {
+        if (item.key) {
+          key[item.key] = level;
+        }
+        if (item.children) {
+          func(item.children, level + 1);
+        }
+      });
+    };
+    func(items1);
+    return key;
+  };
+  const levelKeys = getLevelKeys(items);
+
   let navigate = useNavigate();
   const [stateOpenKeys, setStateOpenKeys] = useState(['2', '23']);
   const onOpenChange = (openKeys) => {
