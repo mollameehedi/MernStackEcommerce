@@ -33,7 +33,11 @@ const items = [
         label: 'Category',
       },
       {
-        key: '/subcategory',
+        key: '/home/addsubcategory',
+        label: 'Create Sub Category',
+      },
+      {
+        key: '/home/subcategory',
         label: 'Sub Category',
       },
       

@@ -1,4 +1,4 @@
-const SubCategory = require("../model/SubCategorySchema");
+const SubCategory = require("../model/subCategorySchema");
 
 
 

@@ -16,6 +16,8 @@ import Home from "./components/pages/Home/Home";
 import User from "./components/pages/User/User";
 import Category from "./components/pages/Category/Category";
 import AddCategory from "./components/pages/Category/AddCategory";
+import SubCategory from "./components/pages/SubCategory/SubCategory";
+import AddSubCategory from "./components/pages/SubCategory/AddSubCategory";
 
 
 const router = createBrowserRouter(
@@ -32,6 +34,9 @@ const router = createBrowserRouter(
 
      <Route  path="category" element={<Category />} />
      <Route  path="addcategory" element={<AddCategory />} />
+
+     <Route  path="subcategory" element={<SubCategory />} />
+     <Route  path="addsubcategory" element={<AddSubCategory />} />
    </Route>
   </>
   )
