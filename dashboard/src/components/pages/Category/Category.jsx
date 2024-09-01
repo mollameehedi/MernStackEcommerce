@@ -22,6 +22,21 @@ let handleDelete = async(id) =>{
   setLoading('')
 }
 
+let handleApproved = async(item) =>{
+  setLoading(item.key);
+  let response = await axios.post(
+    "http://localhost:8000/api/v1/product/approvecategory",
+    {
+      isActive: (item.isActive == "Approved") ? false : true,
+      id: item.key,
+    }
+  );
+
+  console.log(response);
+  setLoadData(!loadData);
+  setLoading("");
+}
+
 const showModal = (id) => {
   setEditId(id)
   setIsModalOpen(true);
@@ -80,8 +95,19 @@ const columns = [
     dataIndex: 'isActive',
     render: (_, record) => (
       <Space size="middle">
+        {data.role == 'Merchant' &&
         <Button onClick={()=> showModal(record.key)}>Edit</Button>
+  }
         <Button onClick={()=>handleDelete(record.key)} loading={loading == record.key? true: ''}>Delete</Button>
+        {data.role == 'Admin' &&
+          <Button onClick={()=>handleApproved(record)}
+            loading={loading == record.key ? true : false}
+            >
+              {" "}
+              {record.isActive == "Approved" ? "Hold" : "Approve"}{" "}
+          </Button>
+
+        }
       </Space>
     ),
   },

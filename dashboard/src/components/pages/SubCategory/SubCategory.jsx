@@ -83,8 +83,13 @@ const columns = [
     dataIndex: 'isActive',
     render: (_, record) => (
       <Space size="middle">
+         {data.role == 'Merchant' &&
         <Button onClick={()=> showModal(record.key)}>Edit</Button>
+         }
         <Button onClick={()=>handleDelete(record.key)} loading={loading == record.key? true: ''}>Delete</Button>
+        {data.role == 'Admin' &&
+        <Button onClick={()=> showModal(record.key)}>Approved</Button>
+        }
       </Space>
     ),
   },
