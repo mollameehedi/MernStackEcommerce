@@ -10,6 +10,11 @@ const categorySubController = require("../../controllers/categorySubController")
 const allSubCategoryController = require("../../controllers/allSubCategoryController");
 const deleteSubCategoryController = require("../../controllers/deleteSubCategoryController");
 const editSubCategoryController = require("../../controllers/editSubCategoryController");
+
+const productController = require("../../controllers/productController");
+
+
+
 const _ = express.Router()
 
 _.post('/categorycreate', categoryController)
@@ -22,6 +27,9 @@ _.get('/allsubcategory',allSubCategoryController)
 _.post("/deletesubcategory", deleteSubCategoryController);
 _.post("/editsubcategory", editSubCategoryController);
 _.post("/approvecategory", approveCategoryController);
+
+_.post("/products" , productController);
+// _.post("/products", upload.single("avatar"), productController);
 
 
 
