@@ -11,6 +11,7 @@ import {
   Upload,
 } from "antd";
 import axios from "axios";
+import { useSelector } from "react-redux";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
@@ -18,11 +19,14 @@ const AddProduct = () => {
   let [checkSize, setCheckSize] = useState("");
   let [value, setValue] = useState("");
   let [valuestock, setValueStock] = useState("");
-//   let [storelist, setStorelist] = useState([]);
+  let [storelist, setStorelist] = useState([]);
   let [image, setImage] = useState({});
   let [imagePrev, setImagePrev] = useState("");
   let [productType, setProductType] = useState("");
   let [description, setDescription] = useState("");
+
+  let userInfo = useSelector((state) => state.activeUser.value);
+  
   const onFinishMain = async (values) => {
     let {name,regularprice,salesprice,quantity} = values;
     //formdata object
@@ -90,15 +94,14 @@ const AddProduct = () => {
     arr[mainid].value.splice(id, 1);
     setValue(arr);
   };
-
   useEffect(() => {
-    console.log("running");
+   
     async function getData() {
       let data = await axios.get(
-        "http://localhost:8000/api/v1/product/allstore/65bce46b16336ca9c7029df6"
+        `http://localhost:8000/api/v1/product/allstore/${userInfo.id}`
       );
       console.log(data.data);
-    //   setStorelist(data.data);
+      setStorelist(data.data);
     }
     getData();
   }, []);
@@ -229,8 +232,8 @@ const AddProduct = () => {
         >
           <Input />
         </Form.Item> */}
-{/* 
-        <Form.Item
+
+<Form.Item
           label="Brand Name"
           name="brandname"
           rules={[
@@ -242,10 +245,10 @@ const AddProduct = () => {
         >
           <Select>
             {storelist.map((item) => (
-              <Select.Option >mehedi</Select.Option>
+              <Select.Option key={item._id} value={item._id}>{item.storename}</Select.Option>
             ))}
           </Select>
-        </Form.Item> */}
+        </Form.Item>
       </Form>
       {productType == "variant" && (
         <>

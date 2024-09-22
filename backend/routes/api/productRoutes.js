@@ -13,6 +13,9 @@ const editSubCategoryController = require("../../controllers/editSubCategoryCont
 
 const productController = require("../../controllers/productController");
 
+const createStoreController = require("../../controllers/createStoreController");
+const allStoreController = require("../../controllers/allStoreController");
+
 
 
 const _ = express.Router()
@@ -30,6 +33,9 @@ _.post("/approvecategory", approveCategoryController);
 
 _.post("/products" , productController);
 // _.post("/products", upload.single("avatar"), productController);
+
+_.post("/createstore", createStoreController);
+_.get("/allstore/:id", allStoreController);
 
 
 
