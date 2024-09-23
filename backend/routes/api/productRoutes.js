@@ -15,6 +15,9 @@ const deleteSubCategoryController = require("../../controllers/deleteSubCategory
 const editSubCategoryController = require("../../controllers/editSubCategoryController");
 
 const productController = require("../../controllers/productController");
+const allProductController = require("../../controllers/allProductController");
+
+const variantController = require("../../controllers/variantController");
 
 const createStoreController = require("../../controllers/createStoreController");
 const allStoreController = require("../../controllers/allStoreController");
@@ -49,8 +52,10 @@ _.post("/deletesubcategory", deleteSubCategoryController);
 _.post("/editsubcategory", editSubCategoryController);
 _.post("/approvecategory", approveCategoryController);
 
-// _.post("/products" , productController);
 _.post("/products", upload.single("avatar"), productController);
+_.get("/allproducts", allProductController);
+
+_.post("/variant", upload.single("vavatar"), variantController);
 
 _.post("/createstore", createStoreController);
 _.get("/allstore/:id", allStoreController);
