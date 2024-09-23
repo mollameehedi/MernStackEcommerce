@@ -12,8 +12,8 @@ import {
 } from "antd";
 import axios from "axios";
 import { useSelector } from "react-redux";
-// import { CKEditor } from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const AddProduct = () => {
   let [checkSize, setCheckSize] = useState("");
@@ -31,23 +31,27 @@ const AddProduct = () => {
     let {name,regularprice,salesprice,quantity} = values;
     //formdata object
     
+    
     let data = await axios.post(
       "http://localhost:8000/api/v1/product/products",
       {
         name:name,
         description: description,
-        // avatar: image,
+        avatar: image,
         regularprice: regularprice,
         salesprice: salesprice,
         quantity: quantity,
       },
-    //   {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   }
-    );
-    console.log(data);
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then(res => {
+      console.log(res);
+      
+    });
   };
 
   const onFinish = (values) => {
@@ -200,7 +204,7 @@ const AddProduct = () => {
         <Input onChange={handleChange} type="file" />
         <img src={imagePrev} />
 
-        {/* <CKEditor
+        <CKEditor
           editor={ClassicEditor}
           data=""
           onReady={(editor) => {
@@ -218,7 +222,7 @@ const AddProduct = () => {
           onFocus={(event, editor) => {
             console.log("Focus.", editor);
           }}
-        /> */}
+        />
 
         {/* <Form.Item
           label="Description"
