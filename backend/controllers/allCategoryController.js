@@ -4,7 +4,6 @@ let allCategoryController = async (req, res) => {
   let data = await Category.find({}).populate("ownerid");
 
   res.send(data);
-  console.log(data);
 };
 
 module.exports = allCategoryController;
