@@ -11,6 +11,7 @@ const approveCategoryController = require("../../controllers/approveCategoryCont
 
 const categorySubController = require("../../controllers/categorySubController");
 const allSubCategoryController = require("../../controllers/allSubCategoryController");
+const singleCategoryController = require("../../controllers/singleCategoryController");
 const deleteSubCategoryController = require("../../controllers/deleteSubCategoryController");
 const editSubCategoryController = require("../../controllers/editSubCategoryController");
 
@@ -43,6 +44,7 @@ const upload = multer({ storage: storage });
 
 _.post('/categorycreate', categoryController)
 _.get('/allcategory',allCategoryController)
+_.get("/singelcategory", singleCategoryController);
 _.post("/deletecategory", deleteCategoryController);
 _.post("/editcategory", editCategoryController);
 

@@ -23,7 +23,7 @@ const productSchema = new Schema({
   quantity: {
     type: Number,
   },
-//   variantsId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Variant" }]
+  variantsId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Variant" }]
 });
 
 module.exports = mongoose.model("Product", productSchema);
