@@ -32,7 +32,7 @@ console.log(data);
       height={300}
       alt="Picture of the author"
     />
-          <li>Details  : {item.description}</li>
+          <li dangerouslySetInnerHTML={{ __html:item.description }}></li>
 </>
         ))
       }

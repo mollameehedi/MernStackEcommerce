@@ -2,9 +2,9 @@ const SubCategory = require("../model/subCategorySchema");
 
 let singleCategoryController = async (req, res) => {
     let { slug } = req.query;
-  console.log("asdasd", req.query);
+  console.log("asce", req.query);
 
-    let data = await SubCategory.find({ categoryId: slug });
+    let data = await SubCategory.find({ categoryid: slug });
     console.log("aaaaaaaaaa",data)
 
     res.send(data);
