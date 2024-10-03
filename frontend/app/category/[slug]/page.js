@@ -28,7 +28,10 @@ const SingleCat = async ({params}) => {
     <div>
         <h2>Sub Category</h2>
       {data.map((item) => (
+        <>
         <h1> {item.name}</h1>
+     
+        </>
       ))}
     </div>
   );

@@ -33,6 +33,12 @@ console.log(data);
       alt="Picture of the author"
     />
           <li dangerouslySetInnerHTML={{ __html:item.description }}></li>
+          <h2>variants</h2>
+        <div className="shadow">
+          {item.variantsId.map((vitem) => (
+            <span className="bg-violet-700 p-2 inline-block">{vitem.name}</span>
+          ))}
+        </div>
 </>
         ))
       }

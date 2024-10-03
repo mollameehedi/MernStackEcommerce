@@ -1,21 +1,21 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const categorySchema = new Schema({
-    name:{
-        type:String,
-        required:true,
+    name: {
+        type: String,
+        required: true,
     },
-    isActive:{
-        type:Boolean,
-        default:false,
+    isActive: {
+        type: Boolean,
+        default: false,
     },
-    
-  ownerid:{
-    type:mongoose.Types.ObjectId,
-    ref:"User"
-  }
+    ownerId: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+    },
+    subCategoryId: [{ type: mongoose.Schema.Types.ObjectId, ref: "SubCategory" }]
 });
 
-module.exports = mongoose.model('Category',categorySchema);
+module.exports = mongoose.model("Category", categorySchema); 

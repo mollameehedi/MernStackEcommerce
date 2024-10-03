@@ -10,6 +10,7 @@ const editCategoryController = require("../../controllers/editCategoryController
 const approveCategoryController = require("../../controllers/approveCategoryController");
 
 const categorySubController = require("../../controllers/categorySubController");
+const subCategoryController = require('../../controllers/subCategoryController');
 const allSubCategoryController = require("../../controllers/allSubCategoryController");
 const singleCategoryController = require("../../controllers/singleCategoryController");
 const deleteSubCategoryController = require("../../controllers/deleteSubCategoryController");
@@ -48,7 +49,7 @@ _.get("/singelcategory", singleCategoryController);
 _.post("/deletecategory", deleteCategoryController);
 _.post("/editcategory", editCategoryController);
 
-_.post('/categorysubcreate', categorySubController)
+_.post('/categorysubcreate', subCategoryController)
 _.get('/allsubcategory',allSubCategoryController)
 _.post("/deletesubcategory", deleteSubCategoryController);
 _.post("/editsubcategory", editSubCategoryController);
