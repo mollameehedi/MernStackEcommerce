@@ -26,6 +26,8 @@ const AddProduct = () => {
   let [description, setDescription] = useState("");
 
   let userInfo = useSelector((state) => state.activeUser.value);
+
+  
   
   const onFinishMain = async (values) => {
     let {name,regularprice,salesprice,quantity} = values;
@@ -99,6 +101,7 @@ const AddProduct = () => {
     setValue(arr);
   };
   useEffect(() => {
+   console.log(userInfo.id);
    
     async function getData() {
       let data = await axios.get(

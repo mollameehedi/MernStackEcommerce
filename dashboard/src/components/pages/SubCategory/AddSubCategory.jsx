@@ -10,10 +10,12 @@ const AddSubCategory = () => {
 
 
   const onFinish = async (values) => {
+    console.log(values);
+    
     await  axios.post('http://127.0.0.1:8000/api/v1/product/categorysubcreate',{
       name:values.name,
-      ownerid:data.id,
-      categoryid:values.categoryid
+      ownerId:data.id,
+      categoryId:values.categoryid
     })
     .then((respone) =>{
       console.log(respone);

@@ -10,6 +10,7 @@ const editCategoryController = require("../../controllers/editCategoryController
 const approveCategoryController = require("../../controllers/approveCategoryController");
 
 const categorySubController = require("../../controllers/categorySubController");
+const subCategoryController = require('../../controllers/subCategoryController');
 const allSubCategoryController = require("../../controllers/allSubCategoryController");
 const singleCategoryController = require("../../controllers/singleCategoryController");
 const deleteSubCategoryController = require("../../controllers/deleteSubCategoryController");
@@ -22,6 +23,9 @@ const variantController = require("../../controllers/variantController");
 
 const createStoreController = require("../../controllers/createStoreController");
 const allStoreController = require("../../controllers/allStoreController");
+
+const cartController = require("../../controllers/cartController");
+const allCartController = require("../../controllers/allCart");
 
 const multer = require("multer");
 
@@ -48,7 +52,7 @@ _.get("/singelcategory", singleCategoryController);
 _.post("/deletecategory", deleteCategoryController);
 _.post("/editcategory", editCategoryController);
 
-_.post('/categorysubcreate', categorySubController)
+_.post('/categorysubcreate', subCategoryController)
 _.get('/allsubcategory',allSubCategoryController)
 _.post("/deletesubcategory", deleteSubCategoryController);
 _.post("/editsubcategory", editSubCategoryController);
@@ -61,6 +65,9 @@ _.post("/variant", upload.single("vavatar"), variantController);
 
 _.post("/createstore", createStoreController);
 _.get("/allstore/:id", allStoreController);
+
+_.post("/createcart", cartController);
+_.get("/allcart", allCartController);
 
 
 
