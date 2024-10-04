@@ -24,6 +24,9 @@ const variantController = require("../../controllers/variantController");
 const createStoreController = require("../../controllers/createStoreController");
 const allStoreController = require("../../controllers/allStoreController");
 
+const cartController = require("../../controllers/cartController");
+const allCartController = require("../../controllers/allCart");
+
 const multer = require("multer");
 
 
@@ -62,6 +65,9 @@ _.post("/variant", upload.single("vavatar"), variantController);
 
 _.post("/createstore", createStoreController);
 _.get("/allstore/:id", allStoreController);
+
+_.post("/createcart", cartController);
+_.get("/allcart", allCartController);
 
 
 
