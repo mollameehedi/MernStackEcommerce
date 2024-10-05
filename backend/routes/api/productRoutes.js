@@ -27,6 +27,9 @@ const allStoreController = require("../../controllers/allStoreController");
 const cartController = require("../../controllers/cartController");
 const allCartController = require("../../controllers/allCart");
 
+const createPaymentController = require("../../controllers/createPayment");
+const createDiscount = require("../../controllers/discount");
+
 const multer = require("multer");
 
 
@@ -68,6 +71,9 @@ _.get("/allstore/:id", allStoreController);
 
 _.post("/createcart", cartController);
 _.get("/allcart", allCartController);
+
+_.post("/createpayment", createPaymentController);
+_.post("/creatediscount", createDiscount);
 
 
 

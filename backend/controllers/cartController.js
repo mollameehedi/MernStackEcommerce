@@ -2,7 +2,7 @@ const Cart = require("../model/cartModel");
 
 let cartController = async (req, res) => {
     let {productId,quantity,cartOwnerId} =  req.body
-    let type = req.query
+    let type = req.query;
 
     console.log(type,req.body)
     
