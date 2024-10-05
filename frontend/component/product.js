@@ -1,49 +1,75 @@
+"use client"
 import React from 'react'
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Image from 'next/image'
+import Button from 'react-bootstrap/Button';
+import { Metrophobic } from 'next/font/google';
+import Link from 'next/link';
 
-async function  getData() {
-    const res = await fetch('http://localhost:8000/api/v1/product/allproducts')
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
-   
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error('Failed to fetch data')
-    }
-   
-    return res.json()
+
+
+
+
+const Product = ({item}) => {
+
+  let handleClick = async (item)=>{
+    const res = await fetch('http://localhost:8000/api/v1/product/createcart',
+   {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({productId: item._id,quantity:1,cartOwnerId:"654e289f24596d19a0b9a37e"})
+   }
+    )
+      if (!res.ok) {
+      
+        throw new Error('Failed to fetch data')
+      }
+ 
+
+      console.log(res)
   }
 
-const Product = async () => {
-    const data = await getData()
-console.log(data);
 
   return (
-    <>
-<ul>
-      {
-        data.map(item => (
-<>
+    <Container>
+    <Row>
 
-<li>Name : {item.name} owner:{item.ownerid?.name}</li>
-<Image
+    {item.map(item=>(
+        <Col xs={4} key={item._id}>
+            <Card >
+            <Image
       src={`http://localhost:8000${item.image}`}
       width={300}
       height={300}
       alt="Picture of the author"
     />
-          <li dangerouslySetInnerHTML={{ __html:item.description }}></li>
-          <h2>variants</h2>
-        <div className="shadow">
-          {item.variantsId.map((vitem) => (
-            <span className="bg-violet-700 p-2 inline-block">{vitem.name}</span>
-          ))}
-        </div>
-</>
-        ))
-      }
-    </ul>
-    </>
+                <Card.Body>
+                <Card.Title><Link href={`/product/${item.name}`}>{item.name}</Link></Card.Title>
+                <Card.Text dangerouslySetInnerHTML={{ __html: item.description }}>
+  
+                
+                </Card.Text>
+                <p>
+                    {item.salesprice ? <span><del>{item.regularprice}</del>-{item.salesprice}</span> : item.regularprice}
+                </p>
+                </Card.Body>
+                <Button onClick={()=>handleClick(item)} variant="warning">Add to Cart</Button>
+            </Card>
+        </Col>
+    ))}
+
+       
+       
+
+    </Row>
+    </Container>
+
   )
 }
 
