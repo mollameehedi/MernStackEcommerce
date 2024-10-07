@@ -3,6 +3,7 @@ const Product = require("../model/productSchema")
 
 let createDiscount =async (req, res) => {
   const { name, amount, type,productId } = req.body;
+console.log(req.body);
 
   if(type=="delivery"){
     if(amount > 50){
