@@ -18,6 +18,8 @@ const editSubCategoryController = require("../../controllers/editSubCategoryCont
 
 const productController = require("../../controllers/productController");
 const allProductController = require("../../controllers/allProductController");
+const singleproductController = require("../../controllers/signlePro");
+
 
 const variantController = require("../../controllers/variantController");
 
@@ -26,6 +28,9 @@ const allStoreController = require("../../controllers/allStoreController");
 
 const cartController = require("../../controllers/cartController");
 const allCartController = require("../../controllers/allCart");
+
+const createPaymentController = require("../../controllers/createPayment");
+const createDiscount = require("../../controllers/discount");
 
 const multer = require("multer");
 
@@ -60,6 +65,7 @@ _.post("/approvecategory", approveCategoryController);
 
 _.post("/products", upload.single("avatar"), productController);
 _.get("/allproducts", allProductController);
+_.get("/singlepro/:slug",singleproductController);
 
 _.post("/variant", upload.single("vavatar"), variantController);
 
@@ -68,6 +74,9 @@ _.get("/allstore/:id", allStoreController);
 
 _.post("/createcart", cartController);
 _.get("/allcart", allCartController);
+
+_.post("/createpayment", createPaymentController);
+_.post("/creatediscount", createDiscount);
 
 
 
